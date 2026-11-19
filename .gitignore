@@ -1,0 +1,34 @@
+# Rahasia
+.env
+.env.*
+!.env.example
+public/.base-path
+
+# Dependensi
+/node_modules/
+/vendor/
+
+# Hasil build: dibuild di komputer lalu diunggah manual ke hosting.
+# Hapus baris ini jika Anda ingin hasil build ikut masuk Git.
+
+# Unggahan pengguna (tetap simpan aturan keamanannya)
+/public/uploads/*
+!/public/uploads/.htaccess
+
+# Log, cache, dan berkas sementara
+/storage/logs/*
+/storage/cache/*
+/storage/uploads/*
+!/storage/logs/.gitkeep
+!/storage/cache/.gitkeep
+
+# Ekspor database (berisi data nyata)
+/database/export/
+
+# Sistem dan editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.log

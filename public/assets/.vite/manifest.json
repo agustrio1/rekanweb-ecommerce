@@ -1,0 +1,30 @@
+{
+  "node_modules/@tiptap/core/dist/index.js": {
+    "file": "assets/dist-BsJ4OEq0.js",
+    "name": "dist",
+    "src": "node_modules/@tiptap/core/dist/index.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/@tiptap/starter-kit/dist/index.js": {
+    "file": "assets/dist-CyUtI4Gn.js",
+    "name": "dist",
+    "src": "node_modules/@tiptap/starter-kit/dist/index.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/@tiptap/core/dist/index.js"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CBU6VP3Y.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "node_modules/@tiptap/core/dist/index.js",
+      "node_modules/@tiptap/starter-kit/dist/index.js"
+    ],
+    "css": [
+      "assets/app-CMu-IJ7s.css"
+    ]
+  }
+}
