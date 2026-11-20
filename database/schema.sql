@@ -353,31 +353,254 @@ INSERT IGNORE INTO `pages` (`slug`, `title`, `content`) VALUES
 ('kebijakan-privasi', 'Kebijakan Privasi', '<p>Tulis kebijakan privasi toko Anda di sini.</p>'),
 ('syarat-ketentuan', 'Syarat dan Ketentuan', '<p>Tulis syarat dan ketentuan toko Anda di sini.</p>');
 
+
 -- ==========================================
--- SEED DATA (Data Demonstrasi)
+-- REKANWEB COMMERCE
+-- SEED DATA: GADGET ACCESSORIES STORE
 -- ==========================================
 
--- 2. Categories
-INSERT INTO `categories` (`name`, `slug`, `description`) VALUES
-('Pakaian Pria', 'pakaian-pria', 'Koleksi pakaian pria berkualitas'),
-('Elektronik', 'elektronik', 'Gadget dan aksesoris elektronik');
+-- 1. CATEGORIES
+INSERT INTO categories (name, slug, description, is_active, is_featured) VALUES
+('Charger & Adaptor', 'charger-adaptor', 'Charger smartphone, adaptor fast charging, dan kepala charger.', 1, 1),
+('Kabel Data', 'kabel-data', 'Kabel USB Type-C, Lightning, Micro USB, dan kabel fast charging.', 1, 1),
+('Powerbank', 'powerbank', 'Powerbank portable untuk berbagai kebutuhan pengisian daya.', 1, 1),
+('Audio & Earphone', 'audio-earphone', 'Earphone, TWS, headset, dan perangkat audio portable.', 1, 1),
+('Holder & Stand', 'holder-stand', 'Holder smartphone, stand meja, dan aksesoris penyangga gadget.', 1, 0),
+('Pelindung Gadget', 'pelindung-gadget', 'Tempered glass, casing, dan perlindungan smartphone.', 1, 1),
+('Aksesoris Komputer', 'aksesoris-komputer', 'Mouse, keyboard, USB hub, dan aksesoris komputer.', 1, 0),
+('Storage & OTG', 'storage-otg', 'Flashdisk, card reader, dan perangkat penyimpanan portable.', 1, 0);
 
--- 3. Products
-INSERT INTO `products` (`category_id`, `name`, `slug`, `description`, `weight_gram`, `length_cm`, `width_cm`, `height_cm`) VALUES
-(1, 'Kaos Polos Premium', 'kaos-polos-premium', 'Kaos katun combed 30s yang nyaman dipakai sehari-hari.', 200, 20, 15, 2),
-(2, 'Powerbank 10000mAh', 'powerbank-10000mah', 'Powerbank fast charging dengan kapasitas 10000mAh.', 350, 15, 10, 3);
+-- 2. PRODUCTS
+INSERT INTO products
+(category_id, name, slug, description, weight_gram, length_cm, width_cm, height_cm)
+VALUES
 
--- 4. Product Variants
-INSERT INTO `product_variants` (`product_id`, `sku`, `variant_name`, `price`, `discount_price`, `stock`) VALUES
-(1, 'KAOS-PTH-M', 'Putih - M', 85000, 75000, 50),
-(1, 'KAOS-PTH-L', 'Putih - L', 85000, 75000, 45),
-(1, 'KAOS-HTM-M', 'Hitam - M', 85000, NULL, 60),
-(2, 'PWB-10K-BLK', 'Hitam', 150000, 135000, 30);
+(
+ (SELECT id FROM categories WHERE slug = 'charger-adaptor'),
+ 'Charger Fast Charging 20W USB-C',
+ 'charger-fast-charging-20w',
+ 'Adaptor charger USB-C 20W dengan teknologi fast charging. Cocok untuk smartphone yang mendukung pengisian daya USB-C.',
+ 120, 10, 7, 4
+),
+(
+ (SELECT id FROM categories WHERE slug = 'charger-adaptor'),
+ 'Charger GaN Fast Charging 65W',
+ 'charger-gan-fast-charging-65w',
+ 'Charger GaN 65W dengan desain compact, mendukung pengisian daya laptop, tablet, dan smartphone.',
+ 180, 12, 8, 5
+),
+(
+ (SELECT id FROM categories WHERE slug = 'charger-adaptor'),
+ 'Charger Wireless 15W',
+ 'charger-wireless-15w',
+ 'Wireless charging pad dengan desain minimalis dan dukungan pengisian daya hingga 15W.',
+ 150, 12, 12, 3
+),
+(
+ (SELECT id FROM categories WHERE slug = 'kabel-data'),
+ 'Kabel USB-C to USB-C 100W',
+ 'kabel-usbc-usbc-100w',
+ 'Kabel USB-C to USB-C dengan dukungan pengisian daya hingga 100W dan transfer data.',
+ 80, 15, 10, 3
+),
+(
+ (SELECT id FROM categories WHERE slug = 'kabel-data'),
+ 'Kabel USB-A to USB-C Fast Charging',
+ 'kabel-usba-usbc-fast-charging',
+ 'Kabel USB-A ke USB-C untuk pengisian daya dan transfer data smartphone.',
+ 65, 12, 9, 3
+),
+(
+ (SELECT id FROM categories WHERE slug = 'kabel-data'),
+ 'Kabel Lightning Fast Charging',
+ 'kabel-lightning-fast-charging',
+ 'Kabel konektor Lightning untuk perangkat Apple yang kompatibel.',
+ 60, 12, 9, 3
+),
+(
+ (SELECT id FROM categories WHERE slug = 'kabel-data'),
+ 'Kabel 3 in 1 Multifungsi',
+ 'kabel-3-in-1-multifungsi',
+ 'Kabel pengisian daya multifungsi dengan konektor USB-C, Lightning, dan Micro USB.',
+ 100, 15, 10, 4
+),
+(
+ (SELECT id FROM categories WHERE slug = 'powerbank'),
+ 'Powerbank 10000mAh Slim',
+ 'powerbank-10000mah-slim',
+ 'Powerbank kapasitas 10000mAh dengan desain tipis dan portable untuk penggunaan sehari-hari.',
+ 250, 16, 9, 3
+),
+(
+ (SELECT id FROM categories WHERE slug = 'powerbank'),
+ 'Powerbank 20000mAh Fast Charging',
+ 'powerbank-20000mah-fast-charging',
+ 'Powerbank berkapasitas 20000mAh dengan dukungan fast charging dan beberapa port output.',
+ 420, 18, 10, 4
+),
+(
+ (SELECT id FROM categories WHERE slug = 'powerbank'),
+ 'Powerbank Magnetic Wireless',
+ 'powerbank-magnetic-wireless',
+ 'Powerbank magnetic wireless dengan desain compact untuk smartphone yang kompatibel.',
+ 230, 12, 8, 3
+),
+(
+ (SELECT id FROM categories WHERE slug = 'audio-earphone'),
+ 'TWS Bluetooth 5.3',
+ 'tws-bluetooth-53',
+ 'True wireless stereo dengan koneksi Bluetooth 5.3, charging case, dan desain ergonomis.',
+ 120, 10, 8, 5
+),
+(
+ (SELECT id FROM categories WHERE slug = 'audio-earphone'),
+ 'Earphone USB-C Hi-Fi',
+ 'earphone-usbc-hifi',
+ 'Earphone kabel dengan konektor USB-C dan desain in-ear untuk kebutuhan musik dan komunikasi.',
+ 45, 12, 8, 3
+),
+(
+ (SELECT id FROM categories WHERE slug = 'audio-earphone'),
+ 'Headset Wireless ANC',
+ 'headset-wireless-anc',
+ 'Headset wireless dengan fitur active noise cancellation dan desain over-ear.',
+ 280, 22, 20, 10
+),
+(
+ (SELECT id FROM categories WHERE slug = 'holder-stand'),
+ 'Holder HP Adjustable Desk',
+ 'holder-hp-adjustable-desk',
+ 'Stand smartphone meja dengan sudut kemiringan yang dapat disesuaikan.',
+ 180, 15, 12, 5
+),
+(
+ (SELECT id FROM categories WHERE slug = 'holder-stand'),
+ 'Car Phone Holder Dashboard',
+ 'car-phone-holder-dashboard',
+ 'Holder smartphone untuk dashboard mobil dengan sistem penjepit yang praktis.',
+ 220, 15, 12, 10
+),
+(
+ (SELECT id FROM categories WHERE slug = 'pelindung-gadget'),
+ 'Tempered Glass Full Cover',
+ 'tempered-glass-full-cover',
+ 'Pelindung layar tempered glass full cover untuk smartphone yang kompatibel.',
+ 40, 18, 10, 2
+),
+(
+ (SELECT id FROM categories WHERE slug = 'pelindung-gadget'),
+ 'Silicone Case Premium',
+ 'silicone-case-premium',
+ 'Casing smartphone berbahan silikon dengan desain minimalis dan perlindungan tambahan.',
+ 70, 18, 10, 3
+),
+(
+ (SELECT id FROM categories WHERE slug = 'aksesoris-komputer'),
+ 'Wireless Mouse Silent Click',
+ 'wireless-mouse-silent-click',
+ 'Mouse wireless dengan silent click, desain ergonomis, dan koneksi USB receiver.',
+ 130, 13, 9, 5
+),
+(
+ (SELECT id FROM categories WHERE slug = 'aksesoris-komputer'),
+ 'USB Hub 4 Port USB 3.0',
+ 'usb-hub-4-port-usb-30',
+ 'USB hub dengan empat port USB 3.0 untuk menambah konektivitas laptop dan komputer.',
+ 110, 12, 8, 3
+),
+(
+ (SELECT id FROM categories WHERE slug = 'storage-otg'),
+ 'Flashdisk USB 3.0 64GB',
+ 'flashdisk-usb-30-64gb',
+ 'Flashdisk USB 3.0 kapasitas 64GB untuk penyimpanan dan pemindahan data.',
+ 25, 8, 3, 2
+);
 
--- 5. Product Images
-INSERT INTO `product_images` (`product_id`, `image_path`, `is_primary`) VALUES
-(1, '/uploads/products/kaos-putih.jpg', 1),
-(2, '/uploads/products/powerbank.jpg', 1);
+-- 3. PRODUCT VARIANTS
+INSERT INTO product_variants
+(product_id, sku, variant_name, price, discount_price, stock)
+VALUES
+
+-- Charger
+((SELECT id FROM products WHERE slug = 'charger-fast-charging-20w'), 'CHG-20W-WHT', 'Putih', 149000, 119000, 45),
+((SELECT id FROM products WHERE slug = 'charger-fast-charging-20w'), 'CHG-20W-BLK', 'Hitam', 149000, NULL, 30),
+
+((SELECT id FROM products WHERE slug = 'charger-gan-fast-charging-65w'), 'GAN-65W-WHT', 'Putih', 399000, 349000, 20),
+((SELECT id FROM products WHERE slug = 'charger-gan-fast-charging-65w'), 'GAN-65W-BLK', 'Hitam', 399000, NULL, 15),
+
+((SELECT id FROM products WHERE slug = 'charger-wireless-15w'), 'WCH-15W-BLK', 'Hitam', 179000, 149000, 25),
+
+-- Kabel
+((SELECT id FROM products WHERE slug = 'kabel-usbc-usbc-100w'), 'CBL-C2C-1M', '1 Meter', 89000, 69000, 60),
+((SELECT id FROM products WHERE slug = 'kabel-usbc-usbc-100w'), 'CBL-C2C-2M', '2 Meter', 109000, 89000, 40),
+
+((SELECT id FROM products WHERE slug = 'kabel-usba-usbc-fast-charging'), 'CBL-A2C-1M', '1 Meter', 49000, 39000, 70),
+((SELECT id FROM products WHERE slug = 'kabel-usba-usbc-fast-charging'), 'CBL-A2C-2M', '2 Meter', 69000, NULL, 35),
+
+((SELECT id FROM products WHERE slug = 'kabel-lightning-fast-charging'), 'CBL-LGT-1M', '1 Meter', 79000, 59000, 40),
+
+((SELECT id FROM products WHERE slug = 'kabel-3-in-1-multifungsi'), 'CBL-3IN1-BLK', 'Hitam', 99000, 79000, 35),
+
+-- Powerbank
+((SELECT id FROM products WHERE slug = 'powerbank-10000mah-slim'), 'PB-10K-BLK', 'Hitam', 199000, 169000, 35),
+((SELECT id FROM products WHERE slug = 'powerbank-10000mah-slim'), 'PB-10K-WHT', 'Putih', 199000, NULL, 25),
+
+((SELECT id FROM products WHERE slug = 'powerbank-20000mah-fast-charging'), 'PB-20K-BLK', 'Hitam', 329000, 289000, 25),
+
+((SELECT id FROM products WHERE slug = 'powerbank-magnetic-wireless'), 'PB-MAG-WHT', 'Putih', 299000, 259000, 20),
+((SELECT id FROM products WHERE slug = 'powerbank-magnetic-wireless'), 'PB-MAG-BLK', 'Hitam', 299000, NULL, 20),
+
+-- Audio
+((SELECT id FROM products WHERE slug = 'tws-bluetooth-53'), 'TWS-53-WHT', 'Putih', 249000, 199000, 30),
+((SELECT id FROM products WHERE slug = 'tws-bluetooth-53'), 'TWS-53-BLK', 'Hitam', 249000, 199000, 25),
+
+((SELECT id FROM products WHERE slug = 'earphone-usbc-hifi'), 'EAR-USBC-BLK', 'Hitam', 89000, 69000, 45),
+
+((SELECT id FROM products WHERE slug = 'headset-wireless-anc'), 'HDP-ANC-BLK', 'Hitam', 599000, 529000, 12),
+
+-- Holder
+((SELECT id FROM products WHERE slug = 'holder-hp-adjustable-desk'), 'HLD-DSK-SLV', 'Silver', 89000, 69000, 35),
+((SELECT id FROM products WHERE slug = 'holder-hp-adjustable-desk'), 'HLD-DSK-BLK', 'Hitam', 89000, NULL, 30),
+
+((SELECT id FROM products WHERE slug = 'car-phone-holder-dashboard'), 'HLD-CAR-BLK', 'Hitam', 119000, 99000, 25),
+
+-- Protection
+((SELECT id FROM products WHERE slug = 'tempered-glass-full-cover'), 'TGL-IP15', 'iPhone 15', 49000, 35000, 30),
+((SELECT id FROM products WHERE slug = 'tempered-glass-full-cover'), 'TGL-S24', 'Samsung S24', 49000, 35000, 30),
+
+((SELECT id FROM products WHERE slug = 'silicone-case-premium'), 'CASE-IP15-BLK', 'iPhone 15 - Hitam', 79000, 59000, 20),
+((SELECT id FROM products WHERE slug = 'silicone-case-premium'), 'CASE-S24-BLK', 'Samsung S24 - Hitam', 79000, 59000, 20),
+
+-- Computer accessories
+((SELECT id FROM products WHERE slug = 'wireless-mouse-silent-click'), 'MSE-SLNT-BLK', 'Hitam', 129000, 99000, 30),
+((SELECT id FROM products WHERE slug = 'usb-hub-4-port-usb-30'), 'USBHUB-4P', '4 Port', 159000, 129000, 25),
+
+-- Storage
+((SELECT id FROM products WHERE slug = 'flashdisk-usb-30-64gb'), 'FD-64GB', '64GB', 99000, 79000, 40);
+
+-- 4. PRODUCT IMAGES
+INSERT INTO product_images (product_id, image_path, is_primary)
+VALUES
+((SELECT id FROM products WHERE slug = 'charger-fast-charging-20w'), '/uploads/products/charger-20w.jpg', 1),
+((SELECT id FROM products WHERE slug = 'charger-gan-fast-charging-65w'), '/uploads/products/charger-gan-65w.jpg', 1),
+((SELECT id FROM products WHERE slug = 'charger-wireless-15w'), '/uploads/products/wireless-charger.jpg', 1),
+((SELECT id FROM products WHERE slug = 'kabel-usbc-usbc-100w'), '/uploads/products/kabel-usbc-100w.jpg', 1),
+((SELECT id FROM products WHERE slug = 'kabel-usba-usbc-fast-charging'), '/uploads/products/kabel-usbc.jpg', 1),
+((SELECT id FROM products WHERE slug = 'kabel-lightning-fast-charging'), '/uploads/products/kabel-lightning.jpg', 1),
+((SELECT id FROM products WHERE slug = 'kabel-3-in-1-multifungsi'), '/uploads/products/kabel-3in1.jpg', 1),
+((SELECT id FROM products WHERE slug = 'powerbank-10000mah-slim'), '/uploads/products/powerbank-10000.jpg', 1),
+((SELECT id FROM products WHERE slug = 'powerbank-20000mah-fast-charging'), '/uploads/products/powerbank-20000.jpg', 1),
+((SELECT id FROM products WHERE slug = 'powerbank-magnetic-wireless'), '/uploads/products/powerbank-magnetic.jpg', 1),
+((SELECT id FROM products WHERE slug = 'tws-bluetooth-53'), '/uploads/products/tws-bluetooth.jpg', 1),
+((SELECT id FROM products WHERE slug = 'earphone-usbc-hifi'), '/uploads/products/earphone-usbc.jpg', 1),
+((SELECT id FROM products WHERE slug = 'headset-wireless-anc'), '/uploads/products/headset-anc.jpg', 1),
+((SELECT id FROM products WHERE slug = 'holder-hp-adjustable-desk'), '/uploads/products/holder-desk.jpg', 1),
+((SELECT id FROM products WHERE slug = 'car-phone-holder-dashboard'), '/uploads/products/car-holder.jpg', 1),
+((SELECT id FROM products WHERE slug = 'tempered-glass-full-cover'), '/uploads/products/tempered-glass.jpg', 1),
+((SELECT id FROM products WHERE slug = 'silicone-case-premium'), '/uploads/products/silicone-case.jpg', 1),
+((SELECT id FROM products WHERE slug = 'wireless-mouse-silent-click'), '/uploads/products/wireless-mouse.jpg', 1),
+((SELECT id FROM products WHERE slug = 'usb-hub-4-port-usb-30'), '/uploads/products/usb-hub.jpg', 1),
+((SELECT id FROM products WHERE slug = 'flashdisk-usb-30-64gb'), '/uploads/products/flashdisk-64gb.jpg', 1);
 
 -- 6. Store Settings
 INSERT INTO `store_settings` (`setting_key`, `setting_value`) VALUES
