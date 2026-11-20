@@ -9,7 +9,8 @@ class ImageUploader
     private const MAX_PIXELS = 16000000; // batas memori saat decode (GD)
     private const MAX_SIDE = 1600;
     private const THUMB_SIDE = 480;
-    private const PATH_RE = '#^/uploads/[a-z0-9_-]+/[A-Za-z0-9][A-Za-z0-9._-]*$#';
+    private const UPLOAD_PREFIX = '/public/upload';
+    private const PATH_RE = '#^/public/upload/[a-z0-9_-]+/[A-Za-z0-9][A-Za-z0-9._-]*$#';
 
     private const TYPES = [
         'image/jpeg' => 'jpg',
@@ -46,7 +47,7 @@ class ImageUploader
     }
 
     /**
-     * Simpan satu gambar ke {DOCUMENT_ROOT}/uploads/{folder}/.
+     * Simpan satu gambar ke {DOCUMENT_ROOT}/public/upload/{folder}/.
      * Jika GD dengan WebP tersedia, gambar dikonversi ke WebP (maks 1600 px).
      * Dengan $thumb = true dibuat juga versi kecil (NAMA-sm.webp) untuk kartu produk.
      *
@@ -87,7 +88,8 @@ class ImageUploader
             return self::fail('Folder web tidak terdeteksi.');
         }
 
-        $dir = $root . '/uploads/' . $folder;
+        $relDir = self::UPLOAD_PREFIX . '/' . $folder;
+        $dir = $root . $relDir;
         if (!is_dir($dir) && !mkdir($dir, 0755, true) && !is_dir($dir)) {
             return self::fail('Folder upload tidak bisa dibuat. Periksa izin folder.');
         }
@@ -113,7 +115,7 @@ class ImageUploader
                 @imagewebp($small, $dir . '/' . $base . '-sm.webp', 78); // gagal tidak fatal
             }
 
-            return ['ok' => true, 'path' => '/uploads/' . $folder . '/' . $base . '.webp'];
+            return ['ok' => true, 'path' => $relDir . '/' . $base . '.webp'];
         }
 
         // Tanpa GD/WebP: simpan file asli (nama tetap diacak).
@@ -122,7 +124,7 @@ class ImageUploader
             return self::fail($label . ': gagal disimpan.');
         }
 
-        return ['ok' => true, 'path' => '/uploads/' . $folder . '/' . $name];
+        return ['ok' => true, 'path' => $relDir . '/' . $name];
     }
 
     /**
@@ -141,7 +143,7 @@ class ImageUploader
 
     /**
      * Hapus file hasil upload beserta thumbnail-nya.
-     * Hanya path di bawah /uploads/{folder}/ yang diproses.
+     * Hanya path di bawah /public/upload/{folder}/ yang diproses.
      */
     public static function delete(string $path): void
     {
